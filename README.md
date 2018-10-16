@@ -39,6 +39,42 @@ A few notes here:
 * The computer should make a random choice (`Math.random` might be useful here) to come up with their play.
 * You should handle wins, losses, and ties.
 
+
+const readlineSync = require('readline-sync');
+
+console.log("Welcome to rock, paper, scissors. Please type 'r', 'p', or 's' to make a choice.?");
+
+readlineSync.promptLoop(function(input) {
+
+  let userRes = input;
+  let computerRes = "";
+
+
+  if(Math.floor(Math.random()* 3) === 1){
+    computerRes = "r"
+  }else if(Math.floor(Math.random()* 3) === 2){
+    computerRes = "p"
+  }else {
+    computerRes = "s"
+  }
+
+  let msg = "";
+
+  if(userRes === computerRes){
+    msg = "Sorry you tied, try again";
+  } else if((computerRes === "r" && userRes === "p") ||
+            (computerRes === 'p' && userRes === 's') ||
+            (computerRes === 's' && userRes === 'r')){
+      msg = "You win (for now), whatever. Computers are gonna win in the end";
+  } else {
+      msg = "You lose!!! You big loser!!!";
+  }
+    console.log(msg);
+
+  return msg === "You win (for now), whatever. Computers are gonna win in the end";
+});
+
+
 ## Bonus
 
 [Eliza](http://psych.fullerton.edu/mbirnbaum/psych101/Eliza.htm) is one of the world's first chatbots. She uses the user's response to come up with a question, mimicking a not-so-insightful therapist. She never says anything herself - she simply picks a detail the user wrote and asks a new question. Play around with her in the link above and see how this works.
